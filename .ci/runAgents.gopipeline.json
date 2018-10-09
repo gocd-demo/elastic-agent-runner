@@ -1,0 +1,51 @@
+{
+  "format_version" : 3,
+  "name": "RunAgents",
+  "environment_variables": [],
+  "group" : "ElasticAgent",
+  "materials": [
+    {
+      "url": "https://github.com/gocd-demo/elastic-agent-runner.git",
+      "type": "git"
+    }
+  ],
+  "stages": [
+    {
+      "name": "build",
+      "fetch_materials": true,
+      "never_cleanup_artifacts": false,
+      "clean_working_directory": false,
+      "environment_variables": [],
+      "jobs": [
+        {
+          "name": "build",
+          "environment_variables": [],
+          "tabs": [],
+          "resources": [],
+          "elastic_profile_id": "docker-local",
+          "artifacts": [],
+          "properties": [],
+          "run_instance_count": 4,
+          "timeout": 0,
+          "tasks": [
+             {
+              "type": "exec",
+              "run_if": "passed",
+              "on_cancel": {
+                "type": "exec",
+                "command": "ls",
+                "working_directory": null
+              },
+              "command": "echo",
+              "arguments": [
+                "FirstJob"
+              ],
+              "working_directory": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
